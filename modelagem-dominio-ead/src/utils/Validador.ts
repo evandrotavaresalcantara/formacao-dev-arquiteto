@@ -32,12 +32,32 @@ export default class Validador {
       : ErroValidacao.novo(erro, valor, { max: tamanhoMaximo });
   }
 
+  static tamanhoMenorQueOuIgual(
+    valor: string | any[],
+    tamanhoMaximo: number,
+    erro: string,
+  ): ErroValidacao | null {
+    return valor.length <= tamanhoMaximo
+      ? null
+      : ErroValidacao.novo(erro, valor, { max: tamanhoMaximo });
+  }
+
   static tamanhoMaiorQue(
     valor: string | any[],
     tamanhoMinimo: number,
     erro: string,
   ): ErroValidacao | null {
     return valor.length > tamanhoMinimo
+      ? null
+      : ErroValidacao.novo(erro, valor, { min: tamanhoMinimo });
+  }
+
+  static tamanhoMaiorQueOuIgual(
+    valor: string | any[],
+    tamanhoMinimo: number,
+    erro: string,
+  ): ErroValidacao | null {
+    return valor.length >= tamanhoMinimo
       ? null
       : ErroValidacao.novo(erro, valor, { min: tamanhoMinimo });
   }

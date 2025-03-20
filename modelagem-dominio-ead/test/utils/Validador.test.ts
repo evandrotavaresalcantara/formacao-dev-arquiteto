@@ -1,3 +1,4 @@
+import Erros from '@/constants/Erros';
 import Validador from '@/utils/Validador';
 
 test('Deve retornar null com texto não nulo', () => {
@@ -86,4 +87,24 @@ test('Deve combinar sem erros', () => {
   );
 
   expect(erros).toBeNull();
+});
+
+test('Deve retornar null com texto menor ou igual que o tamanho máximo', () => {
+  const erro = Validador.tamanhoMenorQueOuIgual('teste', 5, 'erro');
+  expect(erro).toBeNull();
+});
+
+test('Deve retornar erro com texto maior que o tamanho máximo', () => {
+  const erro = Validador.tamanhoMenorQueOuIgual('Bom dia', 6, 'erro');
+  expect(erro?.codigo).toBe('erro');
+});
+
+test('Deve retornar null com texto maior ou igual que o tamanho mínimo', () => {
+  const erro = Validador.tamanhoMaiorQueOuIgual('teste', 5, 'erro');
+  expect(erro).toBeNull();
+});
+
+test('Deve retornar erro com texto menor que o tamanho mínimo', () => {
+  const erro = Validador.tamanhoMaiorQueOuIgual('Bom dia', 10, 'erro');
+  expect(erro?.codigo).toBe('erro');
 });
